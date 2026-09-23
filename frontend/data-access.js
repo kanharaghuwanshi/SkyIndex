@@ -17,10 +17,10 @@
     "use strict";
 
     const SUPABASE_URL =
-        "https://jpdcykvczwtfuxhatuhc.supabase.co";
+        "https://rbjhymvifzsbkncsbeqf.supabase.co";
 
-    const SUPABASE_ANON_KEY =
-        "sb_publishable_RQ199mzy2t3eWw6iAauD-g_zOvVyzUU";
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_glritkOuyWNczQbDF90Ubw_vYEJFm4e";
 
     const TABLES = Object.freeze({
         QUOTES: "airfare_quotes",
@@ -69,7 +69,7 @@
 
     const db = createClient(
         SUPABASE_URL,
-        SUPABASE_ANON_KEY
+        SUPABASE_PUBLISHABLE_KEY
     );
 
     async function fetchPaged(tableName, options = {}) {
