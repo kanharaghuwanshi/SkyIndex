@@ -21,6 +21,8 @@ AVAILABILITY_PATH = "/api/v3/search/availability"
 MIN_REQUEST_INTERVAL_SECONDS = 30.0
 PAGE_LOAD_WAIT_SECONDS = 10.0
 POST_RESPONSE_WAIT_SECONDS = 5.0
+MAX_403_RETRIES = 1
+RETRY_403_WAIT_SECONDS = 30.0
 
 
 @dataclass(frozen=True)
@@ -62,6 +64,13 @@ class SpiceJetSearch:
             "redirectTo": "/",
         }
         return f"{SPICEJET_SEARCH_URL}?{urlencode(params)}"
+
+
+class SpiceJetHTTPError(RuntimeError):
+    def __init__(self, status: int, url: str) -> None:
+        self.status = int(status)
+        self.url = url
+        super().__init__(f"SpiceJet availability returned HTTP {self.status}: {self.url}")
 
 
 class SpiceJetScraper:
@@ -120,11 +129,19 @@ class SpiceJetScraper:
             print(f"Waiting {remaining:.1f}s before next SpiceJet search...")
             time.sleep(remaining)
 
+    def _clear_performance_logs(self) -> None:
+        # Drain old performance events before a new navigation so a response
+        # from a previous search can never be mistaken for the current search.
+        try:
+            self.driver.get_log("performance")
+        except Exception:
+            pass
+
     def _read_availability_response(self) -> dict[str, Any]:
         logs = self.driver.get_log("performance")
 
-        # Read from newest matching response first. This protects us from
-        # accidentally parsing an earlier search when a browser session is reused.
+        # Read from newest matching response first. Logs were drained before
+        # navigation, so matching events belong to the current search attempt.
         for entry in reversed(logs):
             try:
                 outer = json.loads(entry["message"])
@@ -146,9 +163,7 @@ class SpiceJetScraper:
             print(f"Availability response: HTTP {status}")
 
             if status != 200:
-                raise RuntimeError(
-                    f"SpiceJet availability returned HTTP {status}: {url}"
-                )
+                raise SpiceJetHTTPError(status, url)
 
             request_id = params.get("requestId")
             if not request_id:
@@ -198,18 +213,40 @@ class SpiceJetScraper:
     def search(self, request: SpiceJetSearch) -> list[dict[str, Any]]:
         request.validate()
         self._wait_for_request_slot()
-        self._last_search_started_at = time.monotonic()
 
         url = request.url()
-        print(f"Opening: {url}")
+        last_error: Exception | None = None
 
-        # A new navigation triggers one normal browser search. We do not make
-        # separate requests for each flight or each fare option.
-        self.driver.get(url)
-        time.sleep(self.page_load_wait)
-        time.sleep(self.post_response_wait)
+        for attempt in range(MAX_403_RETRIES + 1):
+            if attempt > 0:
+                print(
+                    f"HTTP 403 retry {attempt}/{MAX_403_RETRIES}; "
+                    f"waiting {RETRY_403_WAIT_SECONDS:.0f}s..."
+                )
+                time.sleep(RETRY_403_WAIT_SECONDS)
 
-        raw = self._read_availability_response()
+            self._clear_performance_logs()
+            self._last_search_started_at = time.monotonic()
+            print(f"Opening: {url}" if attempt == 0 else f"Retrying: {url}")
+
+            # One browser navigation triggers the normal site request flow.
+            # No direct API call is made here.
+            self.driver.get(url)
+            time.sleep(self.page_load_wait)
+            time.sleep(self.post_response_wait)
+
+            try:
+                raw = self._read_availability_response()
+                last_error = None
+                break
+            except SpiceJetHTTPError as exc:
+                last_error = exc
+                if exc.status != 403 or attempt >= MAX_403_RETRIES:
+                    raise
+                print("Availability returned HTTP 403; one controlled retry will be attempted.")
+
+        if last_error is not None:
+            raise last_error
 
         collected_at_dt = datetime.now().astimezone()
         collected_at = collected_at_dt.isoformat()
