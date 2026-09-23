@@ -1,0 +1,1454 @@
+[
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 9091",
+    "departure_time": "2026-10-07T04:30:00",
+    "arrival_time": "2026-10-07T06:50:00",
+    "duration_minutes": 140,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 9091",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T04:30:00",
+        "arrival_time": "2026-10-07T06:50:00",
+        "duration_minutes": 140,
+        "aircraft": "73H",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "RS",
+    "fare_code": "USAV",
+    "availability": 1,
+    "base_fare": 4900.0,
+    "taxes": 286.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 286.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 4900.0,
+    "published_fare": 4900.0,
+    "discounted_fare": 4900.0,
+    "total_fare": 6447.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNBVn41NTExfn4wfjY2MX5_WCEwOjQ5MDA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NToyODY-",
+    "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 9091:USAV:2026-10-07",
+    "component_total": 6447.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 9091",
+    "departure_time": "2026-10-07T04:30:00",
+    "arrival_time": "2026-10-07T06:50:00",
+    "duration_minutes": 140,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 9091",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T04:30:00",
+        "arrival_time": "2026-10-07T06:50:00",
+        "duration_minutes": 140,
+        "aircraft": "73H",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "SF",
+    "fare_code": "USMF",
+    "availability": 1,
+    "base_fare": 5300.0,
+    "taxes": 306.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 306.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 5300.0,
+    "published_fare": 5300.0,
+    "discounted_fare": 5300.0,
+    "total_fare": 6867.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNNRn41NTI3fn4wfjYxNH5_WCEwOjUzMDA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozMDY-",
+    "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 9091:USMF:2026-10-07",
+    "component_total": 6867.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 9091",
+    "departure_time": "2026-10-07T04:30:00",
+    "arrival_time": "2026-10-07T06:50:00",
+    "duration_minutes": 140,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 9091",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T04:30:00",
+        "arrival_time": "2026-10-07T06:50:00",
+        "duration_minutes": 140,
+        "aircraft": "73H",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "SC",
+    "fare_code": "USMX",
+    "availability": 1,
+    "base_fare": 6150.0,
+    "taxes": 348.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 348.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 6150.0,
+    "published_fare": 6150.0,
+    "discounted_fare": 6150.0,
+    "total_fare": 7759.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNNWH41NTE3fn4wfjY0N35_WCEwOjYxNTA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozNDg-",
+    "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 9091:USMX:2026-10-07",
+    "component_total": 7759.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 9091",
+    "departure_time": "2026-10-07T04:30:00",
+    "arrival_time": "2026-10-07T06:50:00",
+    "duration_minutes": 140,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 9091",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T04:30:00",
+        "arrival_time": "2026-10-07T06:50:00",
+        "duration_minutes": 140,
+        "aircraft": "73H",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "MC",
+    "fare_code": "UMXC",
+    "availability": 1,
+    "base_fare": 6581.0,
+    "taxes": 370.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 370.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 6581.0,
+    "published_fare": 6581.0,
+    "discounted_fare": 6581.0,
+    "total_fare": 8212.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VU1YQ341NTE3fn4wfjY5OH5_WCEwOjY1ODE0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozNzA-",
+    "segment_key": "U0d_OTA5MX4gfn5ERUx_MTAvMDcvMjAyNiAwNDozMH5CT01_MTAvMDcvMjAyNiAwNjo1MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 9091:UMXC:2026-10-07",
+    "component_total": 8212.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 162",
+    "departure_time": "2026-10-07T19:55:00",
+    "arrival_time": "2026-10-07T22:40:00",
+    "duration_minutes": 165,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 162",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T19:55:00",
+        "arrival_time": "2026-10-07T22:40:00",
+        "duration_minutes": 165,
+        "aircraft": "73G",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "RS",
+    "fare_code": "USAV",
+    "availability": 1,
+    "base_fare": 4900.0,
+    "taxes": 286.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 286.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 4900.0,
+    "published_fare": 4900.0,
+    "discounted_fare": 4900.0,
+    "total_fare": 6447.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNBVn41NTExfn4wfjY2MX5_WCEwOjQ5MDA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NToyODY-",
+    "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 162:USAV:2026-10-07",
+    "component_total": 6447.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 162",
+    "departure_time": "2026-10-07T19:55:00",
+    "arrival_time": "2026-10-07T22:40:00",
+    "duration_minutes": 165,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 162",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T19:55:00",
+        "arrival_time": "2026-10-07T22:40:00",
+        "duration_minutes": 165,
+        "aircraft": "73G",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "SF",
+    "fare_code": "USMF",
+    "availability": 1,
+    "base_fare": 5300.0,
+    "taxes": 306.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 306.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 5300.0,
+    "published_fare": 5300.0,
+    "discounted_fare": 5300.0,
+    "total_fare": 6867.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNNRn41NTI3fn4wfjYxNH5_WCEwOjUzMDA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozMDY-",
+    "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 162:USMF:2026-10-07",
+    "component_total": 6867.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 162",
+    "departure_time": "2026-10-07T19:55:00",
+    "arrival_time": "2026-10-07T22:40:00",
+    "duration_minutes": 165,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 162",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T19:55:00",
+        "arrival_time": "2026-10-07T22:40:00",
+        "duration_minutes": 165,
+        "aircraft": "73G",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "SC",
+    "fare_code": "USMX",
+    "availability": 1,
+    "base_fare": 6150.0,
+    "taxes": 348.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 348.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 6150.0,
+    "published_fare": 6150.0,
+    "discounted_fare": 6150.0,
+    "total_fare": 7759.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNNWH41NTE3fn4wfjY0N35_WCEwOjYxNTA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozNDg-",
+    "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 162:USMX:2026-10-07",
+    "component_total": 7759.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 162",
+    "departure_time": "2026-10-07T19:55:00",
+    "arrival_time": "2026-10-07T22:40:00",
+    "duration_minutes": 165,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 162",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T19:55:00",
+        "arrival_time": "2026-10-07T22:40:00",
+        "duration_minutes": 165,
+        "aircraft": "73G",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "MC",
+    "fare_code": "UMXC",
+    "availability": 1,
+    "base_fare": 6581.0,
+    "taxes": 370.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 370.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 6581.0,
+    "published_fare": 6581.0,
+    "discounted_fare": 6581.0,
+    "total_fare": 8212.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VU1YQ341NTE3fn4wfjY5OH5_WCEwOjY1ODE0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozNzA-",
+    "segment_key": "U0d_IDE2Mn4gfn5ERUx_MTAvMDcvMjAyNiAxOTo1NX5CT01_MTAvMDcvMjAyNiAyMjo0MH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 162:UMXC:2026-10-07",
+    "component_total": 8212.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 2802",
+    "departure_time": "2026-10-07T22:30:00",
+    "arrival_time": "2026-10-08T01:10:00",
+    "duration_minutes": 160,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 2802",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T22:30:00",
+        "arrival_time": "2026-10-08T01:10:00",
+        "duration_minutes": 160,
+        "aircraft": "DH4",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "RS",
+    "fare_code": "USAV",
+    "availability": 1,
+    "base_fare": 4900.0,
+    "taxes": 286.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 286.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 4900.0,
+    "published_fare": 4900.0,
+    "discounted_fare": 4900.0,
+    "total_fare": 6447.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNBVn41NTExfn4wfjY2MX5_WCEwOjQ5MDA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NToyODY-",
+    "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 2802:USAV:2026-10-07",
+    "component_total": 6447.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 2802",
+    "departure_time": "2026-10-07T22:30:00",
+    "arrival_time": "2026-10-08T01:10:00",
+    "duration_minutes": 160,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 2802",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T22:30:00",
+        "arrival_time": "2026-10-08T01:10:00",
+        "duration_minutes": 160,
+        "aircraft": "DH4",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "SF",
+    "fare_code": "USMF",
+    "availability": 1,
+    "base_fare": 5300.0,
+    "taxes": 306.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 306.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 5300.0,
+    "published_fare": 5300.0,
+    "discounted_fare": 5300.0,
+    "total_fare": 6867.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNNRn41NTI3fn4wfjYxNH5_WCEwOjUzMDA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozMDY-",
+    "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 2802:USMF:2026-10-07",
+    "component_total": 6867.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 2802",
+    "departure_time": "2026-10-07T22:30:00",
+    "arrival_time": "2026-10-08T01:10:00",
+    "duration_minutes": 160,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 2802",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T22:30:00",
+        "arrival_time": "2026-10-08T01:10:00",
+        "duration_minutes": 160,
+        "aircraft": "DH4",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "SC",
+    "fare_code": "USMX",
+    "availability": 1,
+    "base_fare": 6150.0,
+    "taxes": 348.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 348.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 6150.0,
+    "published_fare": 6150.0,
+    "discounted_fare": 6150.0,
+    "total_fare": 7759.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VVNNWH41NTE3fn4wfjY0N35_WCEwOjYxNTA0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozNDg-",
+    "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 2802:USMX:2026-10-07",
+    "component_total": 7759.0,
+    "breakdown_match": true
+  },
+  {
+    "origin": "DEL",
+    "destination": "BOM",
+    "travel_date": "2026-10-07",
+    "airline": "SpiceJet",
+    "flight_number": "SG 2802",
+    "departure_time": "2026-10-07T22:30:00",
+    "arrival_time": "2026-10-08T01:10:00",
+    "duration_minutes": 160,
+    "stops": 0,
+    "segments": [
+      {
+        "flight_number": "SG 2802",
+        "origin": "DEL",
+        "destination": "BOM",
+        "departure_time": "2026-10-07T22:30:00",
+        "arrival_time": "2026-10-08T01:10:00",
+        "duration_minutes": 160,
+        "aircraft": "DH4",
+        "departure_terminal": "T-1D",
+        "arrival_terminal": "T-1",
+        "operating_carrier": null,
+        "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_"
+      }
+    ],
+    "fare_class": "U",
+    "fare_class_of_service": "U",
+    "product_class": "MC",
+    "fare_code": "UMXC",
+    "availability": 1,
+    "base_fare": 6581.0,
+    "taxes": 370.0,
+    "udf": 152.0,
+    "fees": 1109.0,
+    "convenience_fee": null,
+    "service_fee": null,
+    "other_charges": 1109.0,
+    "fee_breakdown": [
+      {
+        "code": "RCS",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 100.0,
+        "currency": "INR",
+        "ticket_code": "RCS"
+      },
+      {
+        "code": "TRF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 85.0,
+        "currency": "INR",
+        "ticket_code": "TRF"
+      },
+      {
+        "code": "YQ",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 599.0,
+        "currency": "INR",
+        "ticket_code": "YQ"
+      },
+      {
+        "code": "ASF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 236.0,
+        "currency": "INR",
+        "ticket_code": "ASF"
+      },
+      {
+        "code": "UDF",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 152.0,
+        "currency": "INR",
+        "ticket_code": "UDF"
+      },
+      {
+        "code": "AAT",
+        "detail": "DEL-BOM",
+        "type": 4,
+        "collect_type": 0,
+        "amount": 89.0,
+        "currency": "INR",
+        "ticket_code": "AAT"
+      }
+    ],
+    "tax_breakdown": [
+      {
+        "code": null,
+        "detail": "TaxSum",
+        "type": 5,
+        "collect_type": 0,
+        "amount": 370.0,
+        "currency": "INR",
+        "ticket_code": null
+      }
+    ],
+    "revenue_fare": 6581.0,
+    "published_fare": 6581.0,
+    "discounted_fare": 6581.0,
+    "total_fare": 8212.0,
+    "currency": "INR",
+    "source": "spicejet",
+    "collection_date": "2026-09-23",
+    "collected_at": "2026-09-23T06:44:37.532553+05:30",
+    "lead_time": 14,
+    "journey_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "fare_availability_key": "MH5VfiB_U0d_VU1YQ341NTE3fn4wfjY5OH5_WCEwOjY1ODE0OjEwMDQ6ODU0OjU5OTQ6MjM2NDoxNTI0Ojg5NTozNzA-",
+    "segment_key": "U0d_MjgwMn4gfn5ERUx_MTAvMDcvMjAyNiAyMjozMH5CT01_MTAvMDgvMjAyNiAwMToxMH5_",
+    "operating_carrier": null,
+    "quote_key": "spicejet:DEL:BOM:SG 2802:UMXC:2026-10-07",
+    "component_total": 8212.0,
+    "breakdown_match": true
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb3RSRVogQVBJIiwianRpIjoiYjRlOGNlNzEtNGFiNS0zZTI3LTQxMGMtNzhlMjdlNzM2NTA0IiwiaXNzIjoiZG90UkVaIEFQSSJ9.U-aI9d57bdO5w3xCs9Ktzuax1h1eCGpZE7HfrGbYQeE",
+    "idleTimeoutInMinutes": 15,
+    "userRoleCode": "GENW"
+  },
+  "metadata": {
+    "documentation_url": "http://developer.navitaire.com/documentation/dotrezapi/nsktoken"
+  }
+}
