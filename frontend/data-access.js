@@ -44,9 +44,6 @@
         "duration_minutes",
         "stops",
         "fare_class",
-        "fare_class_of_service",
-        "fare_code",
-        "product_class",
         "base_fare",
         "taxes",
         "udf",
@@ -186,14 +183,11 @@
 
     async function getApixHistory() {
         return fetchPaged(TABLES.APIX, {
+            // Current apix_history table persists the real index series.
+            // Period change is derived in script.js from adjacent dates.
             select: [
                 "index_date",
-                "apix",
-                "previous_apix",
-                "change_value",
-                "change_pct",
-                "baseline_date",
-                "calculation_status"
+                "apix"
             ].join(","),
             orderColumn: "index_date",
             ascending: true
