@@ -210,6 +210,18 @@ async function loadApixHistory() {
                     row => row.apix !== null
                 );
 
+        const firstBaselineRow =
+            apixHistoryData.find(
+                row => row.baseline_date
+            );
+
+        setText(
+            "baselineMeta",
+            firstBaselineRow?.baseline_date
+                ? `Fixed baseline: ${firstBaselineRow.baseline_date}`
+                : "Fixed baseline: awaiting APIx history"
+        );
+
         if (!apixHistoryData.length) {
 
             setText("apix", "--");

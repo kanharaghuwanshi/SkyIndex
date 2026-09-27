@@ -32,7 +32,9 @@
     const PAGE_SIZE = 1000;
 
     const QUOTE_COLUMNS = [
+        "id",
         "collection_date",
+        "collected_at",
         "origin",
         "destination",
         "airline",
@@ -44,6 +46,9 @@
         "duration_minutes",
         "stops",
         "fare_class",
+        "fare_class_of_service",
+        "fare_code",
+        "product_class",
         "base_fare",
         "taxes",
         "udf",
@@ -56,6 +61,8 @@
         "availability",
         "source",
         "quote_key",
+        "segments",
+        "fee_breakdown",
         "breakdown_match"
     ].join(",");
 
@@ -187,7 +194,25 @@
             // Period change is derived in script.js from adjacent dates.
             select: [
                 "index_date",
-                "apix"
+                "apix",
+                "previous_apix",
+                "change_value",
+                "change_pct",
+                "baseline_date",
+                "calculation_version",
+                "calculation_status",
+                "route_count_expected",
+                "route_count_used",
+                "weighted_route_count",
+                "observation_count",
+                "valid_breakdown_count",
+                "breakdown_quality_pct",
+                "weight_coverage_pct",
+                "lead_times_expected",
+                "routes_missing",
+                "route_weights_snapshot",
+                "source_coverage",
+                "notes"
             ].join(","),
             orderColumn: "index_date",
             ascending: true
@@ -234,6 +259,30 @@
         });
     }
 
+    async function getCollectionDates() {
+        const rows = await fetchPaged(TABLES.QUOTES, {
+            select: "collection_date",
+            orderColumn: "collection_date",
+            ascending: true
+        });
+
+        return [
+            ...new Set(
+                rows
+                    .map(row => row.collection_date)
+                    .filter(Boolean)
+            )
+        ];
+    }
+
+    async function getAllQuotes() {
+        return fetchPaged(TABLES.QUOTES, {
+            select: QUOTE_COLUMNS,
+            orderColumn: "collection_date",
+            ascending: true
+        });
+    }
+
     async function getDashboardSnapshot() {
         const {
             collectionDate,
@@ -267,6 +316,8 @@
         getApixHistory,
         getRouteHistory,
         getLeadTimeHistory,
+        getCollectionDates,
+        getAllQuotes,
         getDashboardSnapshot
     });
 })();

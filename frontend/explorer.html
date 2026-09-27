@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkyIndex normalized airfare observation explorer">
+    <title>SkyIndex — Data Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="data-access.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="brand">
+        <div class="brand-mark" aria-hidden="true">✈</div>
+        <div>
+            <div class="brand-title">SkyIndex</div>
+            <div class="brand-subtitle">Indian Airfare Price Intelligence</div>
+        </div>
+    </div>
+    <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Overview</a>
+        <a href="analysis.html">Analysis</a>
+        <a href="explorer.html" class="nav-current">Data Explorer</a>
+    </nav>
+    <div class="live-status">
+        <span class="status-dot"></span>
+        RAW OBSERVATIONS
+    </div>
+</header>
+
+<main class="analysis-page">
+    <section class="analysis-hero">
+        <div>
+            <div class="analysis-eyebrow">Observation explorer</div>
+            <h1 class="analysis-title">Inspect the normalized airfare observations</h1>
+            <p class="analysis-subtitle">
+                Filter the raw observations that feed SkyIndex. This page is intentionally
+                close to the stored data model so new airlines and sources can be inspected
+                without changing the dashboard logic.
+            </p>
+        </div>
+        <div class="analysis-meta">
+            <span class="analysis-pill" id="rowCount">0 rows</span>
+            <span class="analysis-pill" id="explorerBaseline">Baseline —</span>
+        </div>
+    </section>
+
+    <section class="analysis-card">
+        <div class="analysis-toolbar">
+            <div class="analysis-field">
+                <label for="collectionDate">Collection date</label>
+                <input id="collectionDate" type="date">
+            </div>
+            <div class="analysis-field">
+                <label for="routeFilter">Route</label>
+                <select id="routeFilter"><option value="">All routes</option></select>
+            </div>
+            <div class="analysis-field">
+                <label for="airlineFilter">Airline</label>
+                <select id="airlineFilter"><option value="">All airlines</option></select>
+            </div>
+            <div class="analysis-field">
+                <label for="sourceFilter">Source</label>
+                <select id="sourceFilter"><option value="">All sources</option></select>
+            </div>
+            <div class="analysis-field">
+                <label for="leadFilter">Lead time</label>
+                <select id="leadFilter">
+                    <option value="">All</option>
+                    <option value="1">T+1</option>
+                    <option value="7">T+7</option>
+                    <option value="15">T+15</option>
+                    <option value="30">T+30</option>
+                    <option value="45">T+45</option>
+                </select>
+            </div>
+            <div class="analysis-field">
+                <label for="fareFilter">Fare code</label>
+                <select id="fareFilter"><option value="">All fare codes</option></select>
+            </div>
+        </div>
+
+        <div class="analysis-card-body">
+            <div class="analysis-table-wrap">
+                <table class="analysis-table">
+                    <thead>
+                    <tr>
+                        <th>Collection</th>
+                        <th>Route</th>
+                        <th>Airline</th>
+                        <th>Source</th>
+                        <th>Flight</th>
+                        <th>Lead</th>
+                        <th>Fare Code</th>
+                        <th>Base</th>
+                        <th>Taxes</th>
+                        <th>UDF</th>
+                        <th>Fees</th>
+                        <th>Other</th>
+                        <th>Total</th>
+                        <th>Match</th>
+                    </tr>
+                    </thead>
+                    <tbody id="explorerBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <div class="analysis-note">
+        The explorer reads from <code>airfare_quotes</code>. It does not scrape, calculate,
+        modify or delete data. Use Analysis for derived behaviour and APIx interpretation.
+    </div>
+</main>
+
+<script src="explorer.js"></script>
+</body>
+</html>

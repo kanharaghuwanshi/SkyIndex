@@ -24,6 +24,10 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 SUPABASE_ANON_KEY = os.getenv("SUPABASE_ANON_KEY")
 
+# Fixed economic baseline for APIx (real collection date, not travel date).
+# Override in .env when the production baseline changes.
+APIX_BASELINE_DATE = os.getenv("APIX_BASELINE_DATE", "2026-09-23").strip()
+
 
 # ==========================================================
 # COLLECTION SETTINGS
@@ -111,6 +115,12 @@ ROUTE_WEIGHTS = {
 
 
 def _validate_config() -> None:
+    from datetime import date
+    try:
+        date.fromisoformat(APIX_BASELINE_DATE)
+    except ValueError as exc:
+        raise ValueError("APIX_BASELINE_DATE must use YYYY-MM-DD format") from exc
+
     if not ROUTES:
         raise ValueError("ROUTES cannot be empty")
 
