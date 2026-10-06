@@ -52,6 +52,8 @@ SkyIndex/
 ├── spicejet_collector.py
 ├── spicejet_scraper.py
 │
+├── database/
+│   └── schema.sql (run it in Supabase SQL editor to get tables it will create four tables)
 ├── .env.example
 ├── requirements.txt
 ├── README.md
