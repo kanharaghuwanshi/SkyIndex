@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkyIndex normalized airfare observation explorer">
+    <meta name="theme-color" content="#0b2447">
+    <title>SkyIndex — Data Explorer</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="ui.js"></script>
+    <script src="data-access.js"></script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <a class="brand" href="index.html" aria-label="SkyIndex — Overview">
+            <img class="brand-logo" src="logo.svg" width="34" height="34" alt="">
+            <span class="brand-text">
+                <span class="brand-title">SkyIndex</span>
+                <span class="brand-subtitle">Indian Airfare Price Intelligence</span>
+            </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation menu"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+        <nav id="siteNav" class="nav-links" aria-label="Main navigation">
+            <a href="index.html">Overview</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="explorer.html" aria-current="page">Data Explorer</a>
+            <a href="index.html#methodology">Methodology</a>
+        </nav>
+        <div class="page-context">Raw observations</div>
+    </div>
+</header>
+
+<main id="main" class="page">
+
+    <section class="page-head" aria-labelledby="pageTitle">
+        <div class="page-head-main">
+            <div class="page-eyebrow">Observation explorer</div>
+            <h1 id="pageTitle" class="page-title">Inspect the normalized airfare observations</h1>
+            <p class="page-lede">Filter the raw observations that feed SkyIndex. This page is intentionally close to the stored data model so new airlines and sources can be inspected without changing the dashboard logic.</p>
+        </div>
+        <div class="pill-row">
+            <span class="pill" id="rowCount">0 rows</span>
+            <span class="pill" id="explorerBaseline">Baseline —</span>
+        </div>
+    </section>
+
+
+    <form class="filter-bar" aria-label="Observation filters" onsubmit="return false">
+        <fieldset class="filter-cluster f1">
+            <legend class="cluster-title">Collection</legend>
+            <div class="cluster-fields">
+                <div class="field"><label for="collectionDate">Collection date</label><input id="collectionDate" type="date"></div>
+            </div>
+        </fieldset>
+
+        <fieldset class="filter-cluster f3">
+            <legend class="cluster-title">Market scope</legend>
+            <div class="cluster-fields">
+                <div class="field"><label for="routeFilter">Route</label><select id="routeFilter"><option value="">All routes</option></select></div>
+                <div class="field"><label for="airlineFilter">Airline</label><select id="airlineFilter"><option value="">All airlines</option></select></div>
+                <div class="field"><label for="sourceFilter">Source</label><select id="sourceFilter"><option value="">All sources</option></select></div>
+            </div>
+        </fieldset>
+
+        <fieldset class="filter-cluster f2">
+            <legend class="cluster-title">Offer</legend>
+            <div class="cluster-fields">
+                <div class="field"><label for="leadFilter">Lead time</label><select id="leadFilter">
+                        <option value="">All</option>
+                        <option value="1">T+1</option>
+                        <option value="7">T+7</option>
+                        <option value="15">T+15</option>
+                        <option value="30">T+30</option>
+                        <option value="45">T+45</option>
+                    </select></div>
+                <div class="field"><label for="fareFilter">Fare code</label><select id="fareFilter"><option value="">All fare codes</option></select></div>
+            </div>
+        </fieldset>
+    </form>
+
+
+    <section class="panel" aria-labelledby="obsTitle">
+        <div class="panel-head">
+            <div>
+                <div class="panel-title"><h2 id="obsTitle">Observations</h2></div>
+                <p class="panel-sub">One row per stored quote. Amounts are in rupees (₹); Match shows a ✓ when the fare breakdown matches the total.</p>
+            </div>
+        </div>
+
+        <div class="table-wrap scroll-y">
+            <table class="data-table min-1180">
+                <thead>
+                <tr>
+                    <th scope="col">Collection</th>
+                    <th scope="col">Route</th>
+                    <th scope="col">Airline</th>
+                    <th scope="col">Source</th>
+                    <th scope="col">Flight</th>
+                    <th scope="col">Lead</th>
+                    <th scope="col">Fare code</th>
+                    <th scope="col" class="num">Base</th>
+                    <th scope="col" class="num">Taxes</th>
+                    <th scope="col" class="num">UDF</th>
+                    <th scope="col" class="num">Fees</th>
+                    <th scope="col" class="num">Other</th>
+                    <th scope="col" class="num">Total</th>
+                    <th scope="col" class="ctr">Match</th>
+                </tr>
+                </thead>
+                <tbody id="explorerBody">
+                    <tr><td colspan="14" class="empty-cell">Loading observations…</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <p class="page-note">
+        The explorer reads from <code>airfare_quotes</code>. It does not scrape, calculate,
+        modify or delete data. Use Analysis for derived behaviour and APIx interpretation.
+    </p>
+
+    <footer class="site-footer">
+        <div><strong>SkyIndex</strong> · Indian Airfare Price Intelligence</div>
+        <div>Domestic Airfare Monitoring · Prototype analytics platform</div>
+    </footer>
+</main>
+
+
+<script src="explorer.js"></script>
+</body>
+</html>

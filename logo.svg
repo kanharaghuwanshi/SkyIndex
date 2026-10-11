@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="skyindex-logo-title">
+  <title id="skyindex-logo-title">SkyIndex</title>
+
+  <defs>
+    <!-- Background: deep blue gradient -->
+    <linearGradient id="skyindex-bg" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13439E"/>
+      <stop offset=".55" stop-color="#0B2A6E"/>
+      <stop offset="1" stop-color="#0A1647"/>
+    </linearGradient>
+
+    <!-- Bars: orange to red-orange (top to bottom) -->
+    <linearGradient id="skyindex-bars" gradientUnits="userSpaceOnUse" x1="0" y1="560" x2="0" y2="845">
+      <stop offset="0" stop-color="#FDB041"/>
+      <stop offset=".5" stop-color="#FC8A38"/>
+      <stop offset="1" stop-color="#FF4538"/>
+    </linearGradient>
+
+    <!-- Arrow: yellow-orange (tip) to red (tail) -->
+    <linearGradient id="skyindex-arrow" gradientUnits="userSpaceOnUse" x1="990" y1="430" x2="420" y2="700">
+      <stop offset="0" stop-color="#FDB445"/>
+      <stop offset=".55" stop-color="#FB7B3A"/>
+      <stop offset="1" stop-color="#FF4A3A"/>
+    </linearGradient>
+
+    <!-- Head -->
+    <linearGradient id="skyindex-head" gradientUnits="userSpaceOnUse" x1="842" y1="259" x2="842" y2="333">
+      <stop offset="0" stop-color="#FDB445"/>
+      <stop offset="1" stop-color="#FA9B38"/>
+    </linearGradient>
+
+    <!-- Body: white fading to light orange -->
+    <linearGradient id="skyindex-body" gradientUnits="userSpaceOnUse" x1="860" y1="342" x2="880" y2="482">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".6" stop-color="#FFF1E3"/>
+      <stop offset="1" stop-color="#FDD9B8"/>
+    </linearGradient>
+
+    <!-- Speed lines: fade from transparent to orange -->
+    <linearGradient id="skyindex-speed" gradientUnits="userSpaceOnUse" x1="725" y1="525" x2="835" y2="450">
+      <stop offset="0" stop-color="#E8703A" stop-opacity="0"/>
+      <stop offset="1" stop-color="#E8703A" stop-opacity=".95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Deep-blue tile -->
+  <rect width="64" height="64" rx="12" fill="url(#skyindex-bg)"/>
+
+  <!-- Logo (drawn in original 1374x1145 coordinates, scaled to fit 64x64 tile) -->
+  <g transform="translate(-20.46 -9.17) scale(0.0743)">
+    <!-- Ascending bars -->
+    <path fill="url(#skyindex-bars)" d="M461 740Q461 722 478 719Q535 714 583 706Q601 705 601 724L601 825Q601 843 583 843L479 843Q461 843 461 825Z"/>
+    <path fill="url(#skyindex-bars)" d="M637 700Q637 686 652 682Q712 667 752 653Q771 650 771 670L771 824Q771 842 753 842L655 842Q637 842 637 824Z"/>
+    <path fill="url(#skyindex-bars)" d="M807 640Q807 622 825 614Q880 586 915 568Q937 562 937 585L937 822Q937 840 919 840L825 840Q807 840 807 822Z"/>
+
+    <!-- Curved arrow swoosh -->
+    <path fill="url(#skyindex-arrow)" d="M410 692C590 655 770 590 888 508L862 497L998 428L977 569L944 527C830 620 640 685 410 692Z"/>
+
+    <!-- Speed lines -->
+    <path fill="url(#skyindex-speed)" d="M725 506L822 436Q828 430 831 434Q832 438 826 443L735 505Z"/>
+    <path fill="url(#skyindex-speed)" d="M745 540L836 468Q842 464 845 469Q845 473 839 477L752 539Z"/>
+
+    <!-- Person: head + body -->
+    <circle cx="842" cy="296" r="37" fill="url(#skyindex-head)"/>
+    <path fill="url(#skyindex-body)" d="M811 372Q811 366 820 361L866 342Q881 338 886 350L922 454L871 481L836 387Q833 380 825 381L818 384Q811 384 811 372Z"/>
+  </g>
+</svg>

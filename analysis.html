@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkyIndex historical airfare behaviour analysis">
+    <meta name="theme-color" content="#0b2447">
+    <title>SkyIndex — Analysis</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="ui.js"></script>
+    <script src="data-access.js"></script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <a class="brand" href="index.html" aria-label="SkyIndex — Overview">
+            <img class="brand-logo" src="logo.svg" width="34" height="34" alt="">
+            <span class="brand-text">
+                <span class="brand-title">SkyIndex</span>
+                <span class="brand-subtitle">Indian Airfare Price Intelligence</span>
+            </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation menu"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+        <nav id="siteNav" class="nav-links" aria-label="Main navigation">
+            <a href="index.html">Overview</a>
+            <a href="analysis.html" aria-current="page">Analysis</a>
+            <a href="explorer.html">Data Explorer</a>
+            <a href="index.html#methodology">Methodology</a>
+        </nav>
+        <div class="page-context">Historical analysis</div>
+    </div>
+</header>
+
+<main id="main" class="page analysis-page">
+
+    <section class="page-head" aria-labelledby="pageTitle">
+        <div class="page-head-main">
+            <div class="page-eyebrow">Behaviour analysis</div>
+            <h1 id="pageTitle" class="page-title">Understand how airfare behaves over time</h1>
+            <p class="page-lede">Analyse observed fares, lead-time behaviour, fare components, route movement and airline differences using only real collection dates. No synthetic history is created.</p>
+        </div>
+        <div class="pill-row">
+            <span class="pill" id="analysisBaseline">Baseline —</span>
+            <span class="pill" id="analysisCoverage">Coverage —</span>
+        </div>
+    </section>
+
+
+    <form class="filter-bar" aria-label="Analysis filters" onsubmit="return false">
+        <fieldset class="filter-cluster f2">
+            <legend class="cluster-title">Collection period</legend>
+            <div class="cluster-fields">
+                <div class="field"><label for="fromDate">From collection date</label><input id="fromDate" type="date"></div>
+                <div class="field"><label for="toDate">To collection date</label><input id="toDate" type="date"></div>
+            </div>
+        </fieldset>
+
+        <fieldset class="filter-cluster f3">
+            <legend class="cluster-title">Market scope</legend>
+            <div class="cluster-fields">
+                <div class="field"><label for="routeFilter">Route</label><select id="routeFilter"><option value="">All routes</option></select></div>
+                <div class="field"><label for="airlineFilter">Airline</label><select id="airlineFilter"><option value="">All airlines</option></select></div>
+                <div class="field"><label for="sourceFilter">Source</label><select id="sourceFilter"><option value="">All sources</option></select></div>
+            </div>
+        </fieldset>
+
+        <fieldset class="filter-cluster f1">
+            <legend class="cluster-title">Advance purchase</legend>
+            <div class="cluster-fields">
+                <div class="field"><label for="leadFilter">Lead time</label><select id="leadFilter">
+                        <option value="">All</option>
+                        <option value="1">T+1</option>
+                        <option value="7">T+7</option>
+                        <option value="15">T+15</option>
+                        <option value="30">T+30</option>
+                        <option value="45">T+45</option>
+                    </select></div>
+            </div>
+        </fieldset>
+    </form>
+
+
+    <section class="stat-band analysis-kpis" aria-label="Key readings">
+        <div class="stat">
+                <div class="stat-top"><span class="stat-label">Fare change</span><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-fchange" aria-label="About Fare change"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-fchange" role="group" aria-label="Fare change explanation" hidden>
+              <h3>Fare change</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>Percentage change in the median observed total fare between the first and the last collection date in the selected period.</dd></div>
+              <div><dt>Method</dt><dd>(last median ÷ first median − 1) × 100, using the median of all filtered observations on each of those two dates.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>Not a day-over-day change and not the APIx. Changes in the route or airline mix between the two dates also move the median.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                <div id="periodFareChange" class="stat-value">--</div>
+                <div id="periodFareNote" class="stat-sub">First available point → last</div>
+            </div>
+        <div class="stat">
+                <div class="stat-top"><span class="stat-label">Median observed fare</span><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-medfare" aria-label="About Median observed fare"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-medfare" role="group" aria-label="Median observed fare explanation" hidden>
+              <h3>Median observed fare</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>The median observed total fare on the latest collection date within the selected filters.</dd></div>
+              <div><dt>Unit</dt><dd>Rupees (₹).</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                <div id="latestMedianFare" class="stat-value">--</div>
+                <div class="stat-sub">Latest selected collection date</div>
+            </div>
+        <div class="stat">
+                <div class="stat-top"><span class="stat-label">T+45 vs T+1</span><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-spread" aria-label="About T+45 vs T+1"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-spread" role="group" aria-label="T+45 vs T+1 explanation" hidden>
+              <h3>T+45 vs T+1</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>Percentage difference between the T+45 and the T+1 representative fare on the latest selected collection date.</dd></div>
+              <div><dt>Basis</dt><dd>Read from <code>apix_leadtime_history</code>; when several routes are stored the median across routes is used for each lead time.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>This tile uses all routes for that date. The route, airline, source and lead-time filters do not apply to it. The same label in Behaviour signals does respond to the Route filter.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                <div id="leadSpread" class="stat-value">--</div>
+                <div class="stat-sub">Latest selected date</div>
+            </div>
+        <div class="stat">
+                <div class="stat-top"><span class="stat-label">Fare CV</span><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-cv" aria-label="About Fare CV"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-cv" role="group" aria-label="Fare CV explanation" hidden>
+              <h3>Fare CV (coefficient of variation)</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>Spread of the selected observations relative to their mean fare.</dd></div>
+              <div><dt>Method</dt><dd>Sample standard deviation (divided by n − 1) over the mean, times 100, across every selected raw observation in the period.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>Pools routes, airlines, lead times and dates, so it measures dispersion across observations, not price volatility over time.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                <div id="fareCv" class="stat-value">--</div>
+                <div class="stat-sub">Selected raw observations</div>
+            </div>
+    </section>
+
+
+    <div class="stack">
+
+        <section class="grid-2 wide-left">
+            <article class="panel" aria-labelledby="trendTitle">
+                <div class="panel-head">
+                    <div>
+                        <div class="panel-title"><h2 id="trendTitle">Observed fare trend</h2><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-trend" aria-label="About Observed fare trend"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-trend" role="group" aria-label="Observed fare trend explanation" hidden>
+              <h3>Observed fare trend</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>The median observed total fare on each real collection date.</dd></div>
+              <div><dt>X-axis</dt><dd>Collection date. Only dates that exist in the filtered data are plotted; nothing is filled in.</dd></div>
+              <div><dt>Y-axis</dt><dd>Median total fare in rupees (₹).</dd></div>
+              <div><dt>Basis</dt><dd>All observations that match the filters above.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>Observed history, not a forecast. The median pools routes, airlines and lead times, so a change in mix between dates can move it.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                        <p class="panel-sub">Median total fare by real collection date.</p>
+                    </div>
+                </div>
+                <div class="chart-box tall is-loading"><canvas id="fareTrendChart" role="img" aria-label="Line chart of median total fare by collection date"></canvas></div>
+            </article>
+
+            <article class="panel" aria-labelledby="apixtTitle">
+                <div class="panel-head">
+                    <div>
+                        <div class="panel-title"><h2 id="apixtTitle">APIx trend</h2><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-apixt" aria-label="About APIx trend"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-apixt" role="group" aria-label="APIx trend explanation" hidden>
+              <h3>APIx trend</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>The full APIx history from <code>apix_history</code>, a prototype fixed-base index (100 = baseline date).</dd></div>
+              <div><dt>X-axis</dt><dd>Index date. Dates without an APIx value are not filled in.</dd></div>
+              <div><dt>Y-axis</dt><dd>APIx value. The axis starts near 90 unless values fall lower.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>Not affected by the filters above. APIx is an analytical prototype, not an official statistic.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                        <p class="panel-sub">100 = fixed baseline date. Missing calendar dates remain missing.</p>
+                    </div>
+                </div>
+                <div class="chart-box tall is-loading"><canvas id="apixTrendChart" role="img" aria-label="Line chart of APIx by index date"></canvas></div>
+            </article>
+        </section>
+
+        <section class="grid-2">
+            <article class="panel" aria-labelledby="leadbTitle">
+                <div class="panel-head">
+                    <div>
+                        <div class="panel-title"><h2 id="leadbTitle">Lead-time behaviour</h2><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-leadb" aria-label="About Lead-time behaviour"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-leadb" role="group" aria-label="Lead-time behaviour explanation" hidden>
+              <h3>Lead-time behaviour</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>The representative fare at each advance-purchase window on the latest selected collection date.</dd></div>
+              <div><dt>X-axis</dt><dd>Lead time in days: T+1, T+7, T+15, T+30, T+45.</dd></div>
+              <div><dt>Y-axis</dt><dd>Representative total fare in rupees (₹), read from <code>apix_leadtime_history</code>. When several routes are stored, the median across routes is plotted.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>Only the Route filter and the date range (through the latest date) apply. Airline, source and lead-time filters do not.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                        <p class="panel-sub">Representative fare across T+1 → T+45 on the latest selected date.</p>
+                    </div>
+                </div>
+                <div class="chart-box is-loading"><canvas id="leadChart" role="img" aria-label="Line chart of representative fare by lead time"></canvas></div>
+            </article>
+
+            <article class="panel" aria-labelledby="compTitle">
+                <div class="panel-head">
+                    <div>
+                        <div class="panel-title"><h2 id="compTitle">Fare composition</h2><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-comp" aria-label="About Fare composition"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-comp" role="group" aria-label="Fare composition explanation" hidden>
+              <h3>Fare composition</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>How the median of each fare component moves over the selected period.</dd></div>
+              <div><dt>X-axis</dt><dd>Collection date.</dd></div>
+              <div><dt>Y-axis</dt><dd>Median amount in rupees (₹) for base fare, taxes, UDF and fees.</dd></div>
+              <div><dt>Method</dt><dd>Each line is its own median per date, so the four lines do not necessarily add up to the median total fare. Other charges are not shown.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>A missing component value is counted as zero by the current calculation.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                        <p class="panel-sub">Base fare, taxes, UDF and fees over the selected period.</p>
+                    </div>
+                </div>
+                <div class="chart-box is-loading"><canvas id="componentChart" role="img" aria-label="Line chart of median fare components by collection date"></canvas></div>
+            </article>
+        </section>
+
+        <section class="grid-2">
+            <article class="panel" aria-labelledby="airTitle">
+                <div class="panel-head">
+                    <div>
+                        <div class="panel-title"><h2 id="airTitle">Airline comparison</h2><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-air" aria-label="About Airline comparison"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-air" role="group" aria-label="Airline comparison explanation" hidden>
+              <h3>Airline comparison</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>The median observed total fare for each airline within the selected filters.</dd></div>
+              <div><dt>X-axis</dt><dd>Total fare in rupees (₹).</dd></div>
+              <div><dt>Y-axis</dt><dd>Airline, sorted from highest to lowest median.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>Fares are pooled across routes, dates and lead times, so airlines flying different routes are not strictly like-for-like.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                        <p class="panel-sub">Median observed total fare within the selected filters.</p>
+                    </div>
+                </div>
+                <div class="chart-box is-loading"><canvas id="airlineChart" role="img" aria-label="Bar chart of median total fare by airline"></canvas></div>
+            </article>
+
+            <article class="panel" aria-labelledby="sigTitle">
+                <div class="panel-head">
+                    <div>
+                        <div class="panel-title"><h2 id="sigTitle">Behaviour signals</h2><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-sig" aria-label="About Behaviour signals"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-sig" role="group" aria-label="Behaviour signals explanation" hidden>
+              <h3>Behaviour signals</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>Four descriptive readings from the selected observations; none is a forecast.</dd></div>
+              <div><dt>Period movement</dt><dd>First-to-last change in the median observed fare, as in the Fare change tile.</dd></div>
+              <div><dt>T+45 vs T+1</dt><dd>Representative fare comparison on the latest selected date. Responds to the Route filter.</dd></div>
+              <div><dt>Latest APIx</dt><dd>The APIx stored for the latest selected collection date. Shows -- if none exists for that exact date.</dd></div>
+              <div class="caveat"><dt>Coverage</dt><dd>The share of configured route weight represented in that APIx (<code>weight_coverage_pct</code>).</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                        <p class="panel-sub">Descriptive patterns from the selected real observations.</p>
+                    </div>
+                </div>
+                <div id="analysisInsights" class="analysis-insights">
+                    <p class="panel-sub">Loading…</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="panel" aria-labelledby="routeTblTitle">
+            <div class="panel-head">
+                <div>
+                    <div class="panel-title"><h2 id="routeTblTitle">Latest route behaviour vs fixed baseline</h2><span class="info">
+            <button class="info-btn" type="button" aria-expanded="false" aria-controls="info-table" aria-label="About Latest route behaviour vs fixed baseline"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 7.2a.9.9 0 0 1 .9.9v3.6a.9.9 0 1 1-1.8 0V8.1a.9.9 0 0 1 .9-.9zm0-3.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg></button>
+            <div class="info-pop" id="info-table" role="group" aria-label="Latest route behaviour vs fixed baseline explanation" hidden>
+              <h3>Latest route behaviour vs fixed baseline</h3>
+              <dl class="info-list">
+              <div><dt>Shows</dt><dd>For each route, the latest representative fare against the same route on the fixed baseline date.</dd></div>
+              <div><dt>Basis</dt><dd>Rows of <code>apix_route_history</code> for the latest selected collection date, sorted by route index from high to low.</dd></div>
+              <div><dt>Columns</dt><dd>Values are stored fields (representative and baseline fare, route index, and the fare, base fare, tax and fee changes in percent, plus lead-time coverage). The page displays them and does not recompute them.</dd></div>
+              <div class="caveat"><dt>Caveat</dt><dd>Only the Route filter applies to this table.</dd></div>
+              </dl>
+            </div>
+          </span></div>
+                    <p class="panel-sub">Route index and component-level change from the same baseline date.</p>
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table class="data-table min-860">
+                    <thead>
+                    <tr>
+                        <th scope="col">Route</th>
+                        <th scope="col" class="num">Latest fare</th>
+                        <th scope="col" class="num">Baseline fare</th>
+                        <th scope="col" class="num">Route index</th>
+                        <th scope="col" class="num">Fare change</th>
+                        <th scope="col" class="num">Base change</th>
+                        <th scope="col" class="num">Tax change</th>
+                        <th scope="col" class="num">Fee change</th>
+                        <th scope="col" class="num">Lead coverage</th>
+                    </tr>
+                    </thead>
+                    <tbody id="routeAnalysisBody">
+                        <tr><td colspan="9" class="empty-cell">Loading route history…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <p class="page-note">
+        APIx is a fixed-base index. Previous-date change is a separate day-over-day measure.
+        Weekly and monthly views are aggregations of available collection dates; they do not
+        imply that scraping occurred on missing dates.
+    </p>
+
+    <footer class="site-footer">
+        <div><strong>SkyIndex</strong> · Indian Airfare Price Intelligence</div>
+        <div>Domestic Airfare Monitoring · Prototype analytics platform</div>
+    </footer>
+</main>
+
+
+<script src="analysis.js"></script>
+</body>
+</html>
