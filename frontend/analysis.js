@@ -56,6 +56,31 @@
             : `${n >= 0 ? "+" : ""}${n.toFixed(decimals)}%`;
     }
 
+    function esc(value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
+    function markChart(id, hasData) {
+        if (window.SkyIndexUI) {
+            window.SkyIndexUI.setChartState(id, hasData ? "ready" : "empty");
+        }
+    }
+
+    const rupeeTick = value =>
+        `₹${Number(value).toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+
+    const rupeeTooltip = context =>
+        `${context.dataset.label}: ${money(
+            context.chart.options.indexAxis === "y"
+                ? context.parsed.x
+                : context.parsed.y
+        )}`;
+
     function routeKey(row) {
         return `${row.origin}-${row.destination}`;
     }
@@ -89,15 +114,15 @@
 
         el("routeFilter").innerHTML =
             '<option value="">All routes</option>' +
-            routesSet.map(route => `<option value="${route}">${route}</option>`).join("");
+            routesSet.map(route => `<option value="${esc(route)}">${esc(route)}</option>`).join("");
 
         el("airlineFilter").innerHTML =
             '<option value="">All airlines</option>' +
-            airlines.map(airline => `<option value="${airline}">${airline}</option>`).join("");
+            airlines.map(airline => `<option value="${esc(airline)}">${esc(airline)}</option>`).join("");
 
         el("sourceFilter").innerHTML =
             '<option value="">All sources</option>' +
-            sources.map(source => `<option value="${source}">${source}</option>`).join("");
+            sources.map(source => `<option value="${esc(source)}">${esc(source)}</option>`).join("");
     }
 
     function filteredQuotes() {
@@ -209,6 +234,8 @@
 
         const groups = groupedByDate(rows);
 
+        markChart("fareTrendChart", groups.length > 0);
+
         charts.fare = new Chart(
             el("fareTrendChart"),
             {
@@ -220,8 +247,8 @@
                         data: groups.map(([, values]) =>
                             median(values.map(row => row.total_fare))
                         ),
-                        borderColor: "#2874d8",
-                        backgroundColor: "rgba(40,116,216,0.08)",
+                        borderColor: "#1d5fc0",
+                        backgroundColor: "rgba(29,95,192,0.08)",
                         fill: true,
                         tension: 0.28,
                         pointRadius: 3
@@ -230,8 +257,14 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
                     plugins: {
-                        legend: { display: false }
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: rupeeTooltip } }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { ticks: { callback: rupeeTick } }
                     }
                 }
             }
@@ -240,6 +273,8 @@
 
     function drawApix() {
         destroy("apix");
+
+        markChart("apixTrendChart", apix.length > 0);
 
         charts.apix = new Chart(
             el("apixTrendChart"),
@@ -250,8 +285,8 @@
                     datasets: [{
                         label: "APIx",
                         data: apix.map(row => number(row.apix)),
-                        borderColor: "#0b1f3a",
-                        backgroundColor: "rgba(11,31,58,0.06)",
+                        borderColor: "#0b2a5b",
+                        backgroundColor: "rgba(11,42,91,0.07)",
                         fill: true,
                         tension: 0.26,
                         pointRadius: 3
@@ -260,10 +295,12 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
                     plugins: {
                         legend: { display: false }
                     },
                     scales: {
+                        x: { grid: { display: false } },
                         y: {
                             suggestedMin: 90
                         }
@@ -295,6 +332,8 @@
         const ordered = [...grouped.entries()]
             .sort((a, b) => Number(a[0]) - Number(b[0]));
 
+        markChart("leadChart", ordered.length > 0);
+
         charts.lead = new Chart(
             el("leadChart"),
             {
@@ -306,15 +345,24 @@
                         data: ordered.map(([, values]) =>
                             median(values)
                         ),
-                        borderColor: "#2874d8",
-                        backgroundColor: "rgba(40,116,216,0.08)",
+                        borderColor: "#1d5fc0",
+                        backgroundColor: "rgba(29,95,192,0.08)",
                         fill: true,
                         tension: 0.24
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: rupeeTooltip } }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { ticks: { callback: rupeeTick } }
+                    }
                 }
             }
         );
@@ -333,6 +381,8 @@
                 median(values.map(row => row[field]))
             );
 
+        markChart("componentChart", groups.length > 0);
+
         charts.components = new Chart(
             el("componentChart"),
             {
@@ -343,7 +393,7 @@
                         {
                             label: "Base Fare",
                             data: component("base_fare"),
-                            borderColor: "#2874d8",
+                            borderColor: "#1d5fc0",
                             tension: 0.24,
                             pointRadius: 3
                         },
@@ -357,14 +407,14 @@
                         {
                             label: "UDF",
                             data: component("udf"),
-                            borderColor: "#9b7738",
+                            borderColor: "#c98a2b",
                             tension: 0.24,
                             pointRadius: 3
                         },
                         {
                             label: "Fees",
                             data: component("fees"),
-                            borderColor: "#a15b61",
+                            borderColor: "#d2492c",
                             tension: 0.24,
                             pointRadius: 3
                         }
@@ -373,10 +423,16 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
+                    plugins: {
+                        tooltip: { callbacks: { label: rupeeTooltip } }
+                    },
                     scales: {
                         x: {
-                            type: "category"
-                        }
+                            type: "category",
+                            grid: { display: false }
+                        },
+                        y: { ticks: { callback: rupeeTick } }
                     }
                 }
             }
@@ -404,6 +460,8 @@
             }))
             .sort((a, b) => (b.fare ?? 0) - (a.fare ?? 0));
 
+        markChart("airlineChart", ordered.length > 0);
+
         charts.airlines = new Chart(
             el("airlineChart"),
             {
@@ -413,7 +471,8 @@
                     datasets: [{
                         label: "Median Fare",
                         data: ordered.map(row => row.fare),
-                        backgroundColor: "#2874d8"
+                        backgroundColor: "rgba(29,95,192,0.78)",
+                        borderRadius: 3
                     }]
                 },
                 options: {
@@ -421,7 +480,12 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false }
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: rupeeTooltip } }
+                    },
+                    scales: {
+                        x: { ticks: { callback: rupeeTick } },
+                        y: { grid: { display: false } }
                     }
                 }
             }
@@ -442,18 +506,18 @@
         el("routeAnalysisBody").innerHTML =
             rows.map(row => `
                 <tr>
-                    <td>${routeKey(row)}</td>
-                    <td>${money(row.representative_total_fare)}</td>
-                    <td>${money(row.baseline_total_fare)}</td>
-                    <td>${number(row.route_index) === null ? "--" : Number(row.route_index).toFixed(2)}</td>
-                    <td>${percent(row.fare_change_pct)}</td>
-                    <td>${percent(row.base_fare_change_pct)}</td>
-                    <td>${percent(row.taxes_change_pct)}</td>
-                    <td>${percent(row.fees_change_pct)}</td>
-                    <td>${row.lead_time_coverage_pct == null ? "--" : `${Number(row.lead_time_coverage_pct).toFixed(0)}%`}</td>
+                    <td class="strong">${esc(routeKey(row))}</td>
+                    <td class="num">${money(row.representative_total_fare)}</td>
+                    <td class="num">${money(row.baseline_total_fare)}</td>
+                    <td class="num strong">${number(row.route_index) === null ? "--" : Number(row.route_index).toFixed(2)}</td>
+                    <td class="num">${percent(row.fare_change_pct)}</td>
+                    <td class="num">${percent(row.base_fare_change_pct)}</td>
+                    <td class="num">${percent(row.taxes_change_pct)}</td>
+                    <td class="num">${percent(row.fees_change_pct)}</td>
+                    <td class="num">${row.lead_time_coverage_pct == null ? "--" : `${Number(row.lead_time_coverage_pct).toFixed(0)}%`}</td>
                 </tr>
             `).join("") ||
-            `<tr><td colspan="9">No comparable route history for the selected date.</td></tr>`;
+            `<tr><td colspan="9" class="empty-cell">No comparable route history for the selected date.</td></tr>`;
     }
 
     function renderInsights(rows, latestDate, leadCurve) {
@@ -508,8 +572,9 @@
         el("analysisInsights").innerHTML =
             signals.map(signal => `
                 <div class="analysis-insight">
-                    <strong>${signal[0]}</strong>
-                    <span>${signal[1]}<br>${signal[2]}</span>
+                    <strong>${esc(signal[0])}</strong>
+                    <span class="insight-value">${esc(signal[1])}</span>
+                    <span class="insight-note">${esc(signal[2])}</span>
                 </div>
             `).join("");
     }
@@ -576,10 +641,27 @@
             await render();
         } catch (error) {
             console.error("Analysis page error:", error);
-            document.querySelector(".analysis-page").insertAdjacentHTML(
-                "beforeend",
-                `<div class="analysis-note">Unable to load analysis data. Check Supabase read policies and browser console.</div>`
+            const anchor =
+                document.querySelector(".analysis-page .page-head") ||
+                document.querySelector(".analysis-page");
+
+            anchor.insertAdjacentHTML(
+                anchor.classList.contains("page-head") ? "afterend" : "afterbegin",
+                `<div class="analysis-note" role="alert">Unable to load analysis data. Check Supabase read policies and browser console.</div>`
             );
+
+            document.querySelectorAll(".chart-box canvas[id]").forEach(canvas => {
+                if (window.SkyIndexUI) {
+                    window.SkyIndexUI.setChartState(canvas.id, "empty", "Data unavailable.");
+                }
+            });
+
+            const routeBody = el("routeAnalysisBody");
+
+            if (routeBody) {
+                routeBody.innerHTML =
+                    `<tr><td colspan="9" class="empty-cell">Data unavailable.</td></tr>`;
+            }
         }
     }
 

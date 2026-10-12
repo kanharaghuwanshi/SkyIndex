@@ -61,6 +61,12 @@ function el(id) {
     return document.getElementById(id);
 }
 
+function markChart(id, hasData) {
+    if (window.SkyIndexUI) {
+        window.SkyIndexUI.setChartState(id, hasData ? "ready" : "empty");
+    }
+}
+
 function setText(id, value) {
     const node = el(id);
     if (node) node.textContent = value;
@@ -199,6 +205,7 @@ async function loadApixHistory() {
                 .map(
                     row => ({
                         index_date: row.index_date,
+                        baseline_date: row.baseline_date || null,
                         apix: safeNumber(row.apix),
                         previous_apix: safeNumber(row.previous_apix),
                         change_value: safeNumber(row.change_value),
@@ -218,8 +225,8 @@ async function loadApixHistory() {
         setText(
             "baselineMeta",
             firstBaselineRow?.baseline_date
-                ? `Fixed baseline: ${firstBaselineRow.baseline_date}`
-                : "Fixed baseline: awaiting APIx history"
+                ? String(firstBaselineRow.baseline_date)
+                : "Awaiting APIx history"
         );
 
         if (!apixHistoryData.length) {
@@ -474,10 +481,10 @@ function renderApixSparkline(
                             data: values,
 
                             borderColor:
-                                "#2874d8",
+                                "#8fb8f0",
 
                             backgroundColor:
-                                "rgba(40,116,216,0.07)",
+                                "rgba(143,184,240,0.14)",
 
                             fill: true,
 
@@ -574,6 +581,12 @@ function renderApixChart(
             );
 
 
+    markChart(
+        "apixChart",
+        values.some(value => value !== null)
+    );
+
+
     apixChart =
         new Chart(
             canvas,
@@ -609,13 +622,13 @@ function renderApixChart(
                             fill: true,
 
                             backgroundColor:
-                                "rgba(40,116,216,0.09)",
+                                "rgba(29,95,192,0.09)",
 
                             borderColor:
-                                "#2874d8",
+                                "#1d5fc0",
 
                             pointBackgroundColor:
-                                "#2874d8",
+                                "#1d5fc0",
 
                             spanGaps:
                                 true
@@ -655,7 +668,7 @@ function renderApixChart(
                         tooltip: {
 
                             backgroundColor:
-                                "#101a2d",
+                                "#0b2447",
 
                             padding:
                                 11,
@@ -710,7 +723,7 @@ function renderApixChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 maxTicksLimit:
                                     9,
@@ -718,7 +731,7 @@ function renderApixChart(
                                 font: {
 
                                     size:
-                                        10
+                                        11
 
                                 }
 
@@ -741,12 +754,12 @@ function renderApixChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 font: {
 
                                     size:
-                                        10
+                                        11
 
                                 }
 
@@ -839,13 +852,9 @@ function showTableError(
         <tr>
             <td
                 colspan="8"
-                style="
-                    text-align:center;
-                    padding:40px;
-                    color:#8995a5;
-                "
+                class="empty-cell"
             >
-                ${message}
+                ${escapeHtml(message)}
             </td>
         </tr>
     `;
@@ -2369,13 +2378,7 @@ function renderRouteSnapshots(
     ) {
 
         container.innerHTML = `
-            <div
-                class="route-snapshot-item"
-                style="
-                    cursor:default;
-                    color:#8995a5;
-                "
-            >
+            <div class="empty-cell">
                 No route analytics available
                 for the current filter set.
             </div>
@@ -2403,6 +2406,38 @@ function renderRouteSnapshots(
 
                 node.className =
                     "route-snapshot-item";
+
+                node.tabIndex = 0;
+
+                node.setAttribute(
+                    "role",
+                    "button"
+                );
+
+                node.setAttribute(
+                    "aria-label",
+                    `Open route detail for ${item.route.replace("-", " to ")}`
+                );
+
+                node.addEventListener(
+                    "keydown",
+                    event => {
+
+                        if (
+                            event.key === "Enter" ||
+                            event.key === " "
+                        ) {
+
+                            event.preventDefault();
+
+                            openRouteModal(
+                                item.route
+                            );
+
+                        }
+
+                    }
+                );
 
 
                 node.innerHTML = `
@@ -2555,6 +2590,12 @@ function renderRouteChart(
         );
 
 
+    markChart(
+        "routeChart",
+        ranking.length > 0
+    );
+
+
     routeChart =
         new Chart(
             canvas,
@@ -2584,10 +2625,10 @@ function renderRouteChart(
                                 ),
 
                             backgroundColor:
-                                "rgba(40,116,216,0.78)",
+                                "rgba(29,95,192,0.78)",
 
                             hoverBackgroundColor:
-                                "#2874d8",
+                                "#1d5fc0",
 
                             borderRadius:
                                 6,
@@ -2634,7 +2675,7 @@ function renderRouteChart(
                         tooltip: {
 
                             backgroundColor:
-                                "#101a2d",
+                                "#0b2447",
 
                             padding:
                                 10,
@@ -2676,7 +2717,7 @@ function renderRouteChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 callback:
                                     value =>
@@ -2700,12 +2741,12 @@ function renderRouteChart(
                             ticks: {
 
                                 color:
-                                    "#56657a",
+                                    "#4a5a72",
 
                                 font: {
 
                                     size:
-                                        10,
+                                        11,
 
                                     weight:
                                         "600"
@@ -2829,6 +2870,12 @@ function renderLeadTimeChart(
         );
 
 
+    markChart(
+        "leadTimeChart",
+        values.some(value => value !== null)
+    );
+
+
     leadTimeChart =
         new Chart(
             canvas,
@@ -2868,13 +2915,13 @@ function renderLeadTimeChart(
                                 7,
 
                             borderColor:
-                                "#2874d8",
+                                "#1d5fc0",
 
                             backgroundColor:
-                                "rgba(40,116,216,0.08)",
+                                "rgba(29,95,192,0.08)",
 
                             pointBackgroundColor:
-                                "#2874d8",
+                                "#1d5fc0",
 
                             fill:
                                 true,
@@ -2918,7 +2965,7 @@ function renderLeadTimeChart(
                         tooltip: {
 
                             backgroundColor:
-                                "#101a2d",
+                                "#0b2447",
 
                             padding:
                                 10,
@@ -2962,12 +3009,12 @@ function renderLeadTimeChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 font: {
 
                                     size:
-                                        10,
+                                        11,
 
                                     weight:
                                         "650"
@@ -2993,7 +3040,7 @@ function renderLeadTimeChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 callback:
                                     value =>
@@ -3121,6 +3168,12 @@ function renderAirlineChart(
         );
 
 
+    markChart(
+        "airlineChart",
+        ranking.length > 0
+    );
+
+
     airlineChart =
         new Chart(
             canvas,
@@ -3151,10 +3204,10 @@ function renderAirlineChart(
                                 ),
 
                             backgroundColor:
-                                "rgba(40,116,216,0.72)",
+                                "rgba(29,95,192,0.72)",
 
                             hoverBackgroundColor:
-                                "#2874d8",
+                                "#1d5fc0",
 
                             borderRadius:
                                 6,
@@ -3188,7 +3241,7 @@ function renderAirlineChart(
                         tooltip: {
 
                             backgroundColor:
-                                "#101a2d",
+                                "#0b2447",
 
                             padding:
                                 10,
@@ -3245,12 +3298,12 @@ function renderAirlineChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 font: {
 
                                     size:
-                                        10
+                                        11
 
                                 }
 
@@ -3273,7 +3326,7 @@ function renderAirlineChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 callback:
                                     value =>
@@ -3339,9 +3392,19 @@ function renderFareDistributionChart(
         fareDistributionChart =
             null;
 
+        markChart(
+            "fareDistributionChart",
+            false
+        );
+
         return;
 
     }
+
+    markChart(
+        "fareDistributionChart",
+        true
+    );
 
 
     const min =
@@ -3478,10 +3541,10 @@ function renderFareDistributionChart(
                                 ),
 
                             backgroundColor:
-                                "rgba(40,116,216,0.68)",
+                                "rgba(29,95,192,0.68)",
 
                             hoverBackgroundColor:
-                                "#2874d8",
+                                "#1d5fc0",
 
                             borderRadius:
                                 5,
@@ -3515,7 +3578,7 @@ function renderFareDistributionChart(
                         tooltip: {
 
                             backgroundColor:
-                                "#101a2d",
+                                "#0b2447",
 
                             padding:
                                 10,
@@ -3553,7 +3616,7 @@ function renderFareDistributionChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 maxRotation:
                                     35,
@@ -3580,7 +3643,7 @@ function renderFareDistributionChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3"
+                                    "#5f6f86"
 
                             }
 
@@ -3758,6 +3821,12 @@ function renderVolatilityChart(
         );
 
 
+    markChart(
+        "volatilityChart",
+        rows.length > 0
+    );
+
+
     volatilityChart =
         new Chart(
             canvas,
@@ -3828,7 +3897,7 @@ function renderVolatilityChart(
                         tooltip: {
 
                             backgroundColor:
-                                "#101a2d",
+                                "#0b2447",
 
                             padding:
                                 10,
@@ -3874,7 +3943,7 @@ function renderVolatilityChart(
                             ticks: {
 
                                 color:
-                                    "#8491a3",
+                                    "#5f6f86",
 
                                 callback:
                                     value =>
@@ -3896,12 +3965,12 @@ function renderVolatilityChart(
                             ticks: {
 
                                 color:
-                                    "#56657a",
+                                    "#4a5a72",
 
                                 font: {
 
                                     size:
-                                        10
+                                        11
 
                                 }
 
@@ -4199,11 +4268,7 @@ function updateTable() {
             <tr>
                 <td
                     colspan="8"
-                    style="
-                        text-align:center;
-                        padding:40px;
-                        color:#8995a5;
-                    "
+                    class="empty-cell"
                 >
                     No observations match
                     the selected filters.
@@ -4223,8 +4288,29 @@ function updateTable() {
                 );
 
 
-            tr.style.cursor =
-                "pointer";
+            tr.tabIndex = 0;
+
+            tr.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        openRouteModal(
+                            routeKey(
+                                row
+                            )
+                        );
+
+                    }
+
+                }
+            );
 
 
             tr.innerHTML = `
@@ -4286,7 +4372,7 @@ function updateTable() {
                     </span>
                 </td>
 
-                <td>
+                <td class="num">
                     ${formatCurrency(
                         row.total_fare
                     )}
@@ -4697,6 +4783,8 @@ function openRouteModal(
    MODAL HELPERS
 ========================================================= */
 
+let modalReturnFocus = null;
+
 function openModal(
     id
 ) {
@@ -4707,6 +4795,18 @@ function openModal(
 
     if (!node) {
         return;
+    }
+
+
+    if (
+        !document.querySelector(
+            ".modal-backdrop.open"
+        )
+    ) {
+
+        modalReturnFocus =
+            document.activeElement;
+
     }
 
 
@@ -4723,6 +4823,18 @@ function openModal(
 
     document.body.style.overflow =
         "hidden";
+
+
+    const closeButton =
+        node.querySelector(
+            ".modal-close"
+        );
+
+    if (closeButton) {
+
+        closeButton.focus();
+
+    }
 
 }
 
@@ -4751,8 +4863,30 @@ function closeModal(
     );
 
 
-    document.body.style.overflow =
-        "";
+    if (
+        !document.querySelector(
+            ".modal-backdrop.open"
+        )
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+        if (
+            modalReturnFocus &&
+            document.contains(
+                modalReturnFocus
+            )
+        ) {
+
+            modalReturnFocus.focus();
+
+        }
+
+        modalReturnFocus =
+            null;
+
+    }
 
 }
 
@@ -4816,6 +4950,65 @@ function setupModalEvents() {
     document.addEventListener(
         "keydown",
         event => {
+
+            if (
+                event.key === "Tab"
+            ) {
+
+                const openModalNode =
+                    document.querySelector(
+                        ".modal-backdrop.open"
+                    );
+
+                if (!openModalNode) {
+
+                    return;
+
+                }
+
+                const focusable = [
+                    ...openModalNode.querySelectorAll(
+                        "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])"
+                    )
+                ];
+
+                if (!focusable.length) {
+
+                    return;
+
+                }
+
+                const first =
+                    focusable[0];
+
+                const last =
+                    focusable[
+                        focusable.length - 1
+                    ];
+
+                if (
+                    event.shiftKey &&
+                    document.activeElement === first
+                ) {
+
+                    event.preventDefault();
+
+                    last.focus();
+
+                } else if (
+                    !event.shiftKey &&
+                    document.activeElement === last
+                ) {
+
+                    event.preventDefault();
+
+                    first.focus();
+
+                }
+
+                return;
+
+            }
 
             if (
                 event.key !==
@@ -5175,6 +5368,33 @@ function setupDashboardEvents() {
 
     setupModalEvents();
 
+    if (
+        window.location.hash === "#methodology"
+    ) {
+
+        openModal(
+            "methodologyModal"
+        );
+
+    }
+
+    window.addEventListener(
+        "hashchange",
+        () => {
+
+            if (
+                window.location.hash === "#methodology"
+            ) {
+
+                openModal(
+                    "methodologyModal"
+                );
+
+            }
+
+        }
+    );
+
 }
 
 
@@ -5219,11 +5439,14 @@ async function refreshDashboard() {
 
     setText(
         "lastUpdated",
-        `Last updated: ${
-            new Date().toLocaleString(
-                "en-IN"
-            )
-        }`
+        new Date().toLocaleString(
+            "en-IN"
+        )
+    );
+
+    setText(
+        "latestCollectionMeta",
+        latestCollectionDate || "--"
     );
 
 }

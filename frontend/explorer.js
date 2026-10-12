@@ -21,6 +21,15 @@
             : `₹${n.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
     }
 
+    function esc(value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
     function routeKey(row) {
         return `${row.origin}-${row.destination}`;
     }
@@ -28,7 +37,7 @@
     function optionList(values, placeholder) {
         return `<option value="">${placeholder}</option>` +
             values.map(value =>
-                `<option value="${String(value).replace(/"/g, "&quot;")}">${value}</option>`
+                `<option value="${esc(value)}">${esc(value)}</option>`
             ).join("");
     }
 
@@ -92,23 +101,23 @@
         el("explorerBody").innerHTML =
             data.map(row => `
                 <tr>
-                    <td>${row.collection_date || "--"}</td>
-                    <td>${routeKey(row)}</td>
-                    <td>${row.airline || "--"}</td>
-                    <td>${row.source || "--"}</td>
-                    <td>${row.flight_number || "--"}</td>
-                    <td>T+${row.lead_time ?? "--"}</td>
-                    <td>${row.fare_code || "--"}</td>
-                    <td>${money(row.base_fare)}</td>
-                    <td>${money(row.taxes)}</td>
-                    <td>${money(row.udf)}</td>
-                    <td>${money(row.fees)}</td>
-                    <td>${money(row.other_charges)}</td>
-                    <td>${money(row.total_fare)}</td>
-                    <td>${row.breakdown_match === true ? "✓" : "--"}</td>
+                    <td>${esc(row.collection_date || "--")}</td>
+                    <td>${esc(routeKey(row))}</td>
+                    <td>${esc(row.airline || "--")}</td>
+                    <td>${esc(row.source || "--")}</td>
+                    <td class="mono">${esc(row.flight_number || "--")}</td>
+                    <td>T+${esc(row.lead_time ?? "--")}</td>
+                    <td>${esc(row.fare_code || "--")}</td>
+                    <td class="num">${money(row.base_fare)}</td>
+                    <td class="num">${money(row.taxes)}</td>
+                    <td class="num">${money(row.udf)}</td>
+                    <td class="num">${money(row.fees)}</td>
+                    <td class="num">${money(row.other_charges)}</td>
+                    <td class="num strong">${money(row.total_fare)}</td>
+                    <td class="ctr">${row.breakdown_match === true ? "✓" : "--"}</td>
                 </tr>
             `).join("") ||
-            `<tr><td colspan="14">No matching observations.</td></tr>`;
+            `<tr><td colspan="14" class="empty-cell">No matching observations for the selected filters.</td></tr>`;
     }
 
     async function boot() {
@@ -138,7 +147,7 @@
         } catch (error) {
             console.error("Explorer page error:", error);
             el("explorerBody").innerHTML =
-                `<tr><td colspan="14">Unable to load observations. Check Supabase read policies and browser console.</td></tr>`;
+                `<tr><td colspan="14" class="empty-cell">Unable to load observations. Check Supabase read policies and browser console.</td></tr>`;
         }
     }
 
